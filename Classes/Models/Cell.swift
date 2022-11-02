@@ -18,6 +18,10 @@ struct Cell {
     let y: Int
     var state: State
     
+    var isAlive: Bool {
+        state == .alive
+    }
+    
     init(x: Int, y: Int, state: State) {
         self.x = x
         self.y = y

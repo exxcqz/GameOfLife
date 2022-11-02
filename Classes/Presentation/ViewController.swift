@@ -69,7 +69,7 @@ final class ViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func startStopButtonTapped() {
-        if grid.cells.isEmpty {
+        if grid.rows.isEmpty {
             randomize()
         }
         if !isWorked {

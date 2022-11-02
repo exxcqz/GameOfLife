@@ -15,6 +15,9 @@
 		11DE393D2912458E009CA1FD /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE393C2912458D009CA1FD /* Cell.swift */; };
 		11DE393F29124946009CA1FD /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE393E29124946009CA1FD /* Grid.swift */; };
 		11DE394129125225009CA1FD /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE394029125225009CA1FD /* GridView.swift */; };
+		11DE39432912AAA4009CA1FD /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE39422912AAA3009CA1FD /* Row.swift */; };
+		11DE39462912AEBF009CA1FD /* NeighborFinderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE39452912AEBF009CA1FD /* NeighborFinderProtocol.swift */; };
+		11DE39482912AEF5009CA1FD /* NeighborFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DE39472912AEF5009CA1FD /* NeighborFinder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		11DE393C2912458D009CA1FD /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		11DE393E29124946009CA1FD /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		11DE394029125225009CA1FD /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		11DE39422912AAA3009CA1FD /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
+		11DE39452912AEBF009CA1FD /* NeighborFinderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborFinderProtocol.swift; sourceTree = "<group>"; };
+		11DE39472912AEF5009CA1FD /* NeighborFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborFinder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 			children = (
 				11DE392529123B10009CA1FD /* AppDelegate.swift */,
 				11DE392729123B10009CA1FD /* SceneDelegate.swift */,
+				11DE39442912AE97009CA1FD /* Helpers */,
 				11DE393B29123F66009CA1FD /* Models */,
 				11DE393A29123F5A009CA1FD /* Presentation */,
 			);
@@ -92,9 +99,19 @@
 			isa = PBXGroup;
 			children = (
 				11DE393C2912458D009CA1FD /* Cell.swift */,
+				11DE39422912AAA3009CA1FD /* Row.swift */,
 				11DE393E29124946009CA1FD /* Grid.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		11DE39442912AE97009CA1FD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				11DE39452912AEBF009CA1FD /* NeighborFinderProtocol.swift */,
+				11DE39472912AEF5009CA1FD /* NeighborFinder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,7 +189,10 @@
 				11DE392629123B10009CA1FD /* AppDelegate.swift in Sources */,
 				11DE393F29124946009CA1FD /* Grid.swift in Sources */,
 				11DE394129125225009CA1FD /* GridView.swift in Sources */,
+				11DE39432912AAA4009CA1FD /* Row.swift in Sources */,
 				11DE392829123B10009CA1FD /* SceneDelegate.swift in Sources */,
+				11DE39482912AEF5009CA1FD /* NeighborFinder.swift in Sources */,
+				11DE39462912AEBF009CA1FD /* NeighborFinderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

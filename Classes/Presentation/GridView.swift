@@ -28,15 +28,17 @@ final class GridView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.saveGState()
-        for cell in grid.cells {
-            let rect = CGRect(x: .init(CGFloat(cell.x) * cellSize.width),
-                              y: .init(CGFloat(cell.y) * cellSize.height),
-                              width: cellSize.width,
-                              height: cellSize.height)
-            let color = cell.state == .alive ? UIColor.black.cgColor : UIColor.white.cgColor
-            context?.addRect(rect)
-            context?.setFillColor(color)
-            context?.fill(rect)
+        grid.rows.forEach { row in
+            row.cells.forEach { cell in
+                let rect = CGRect(x: .init(CGFloat(cell.x) * cellSize.width),
+                                  y: .init(CGFloat(cell.y) * cellSize.height),
+                                  width: cellSize.width,
+                                  height: cellSize.height)
+                let color = cell.state == .alive ? UIColor.black.cgColor : UIColor.white.cgColor
+                context?.addRect(rect)
+                context?.setFillColor(color)
+                context?.fill(rect)
+            }
         }
         context?.restoreGState()
     }
