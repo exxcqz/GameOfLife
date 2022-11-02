@@ -1,7 +1,7 @@
 # GameOfLife
 
 <p align="center">
-        <img src="img/main.PNG" width="300" height="650">
+        <img src="img/main.png" width="300" height="650">
 </p>
 
 # Installation
