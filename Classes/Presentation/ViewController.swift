@@ -8,14 +8,17 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    
-    private var timer: Timer?
-    
+
+    private weak var timer: Timer?
+    private weak var workItem: DispatchWorkItem?
+
     private let grid: Grid = .init(size: 50)
     private var isWorked: Bool = false
-    
+
+    // MARK: - Subviews
+
     private lazy var gridView: GridView = .init(grid: grid)
-    
+
     private lazy var startStopButton: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Start/Stop", for: .normal)
@@ -25,7 +28,7 @@ final class ViewController: UIViewController {
         view.addTarget(self, action: #selector(startStopButtonTapped), for: .touchUpInside)
         return view
     }()
-    
+
     private lazy var randomizeButton: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Randomize", for: .normal)
@@ -36,11 +39,13 @@ final class ViewController: UIViewController {
         return view
     }()
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gridView.frame = .init(x: 20,
@@ -60,38 +65,60 @@ final class ViewController: UIViewController {
                                       width: 120,
                                       height: 40)
     }
+
+    // MARK: - Actions
     
+    @objc private func startStopButtonTapped() {
+        if grid.cells.isEmpty {
+            randomize()
+        }
+        if !isWorked {
+            updateGridView()
+        } else {
+            deleteTimer()
+        }
+        isWorked.toggle()
+    }
+
+    @objc private func randomizeButtonTapped() {
+        deleteTimer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.randomize()
+        }
+    }
+
+    // MARK: - Private
+
     private func setup() {
         view.backgroundColor = .white
         view.addSubview(gridView)
         view.addSubview(startStopButton)
         view.addSubview(randomizeButton)
     }
-    
+
     private func deleteTimer() {
         timer?.invalidate()
         timer = nil
+        workItem?.cancel()
+        workItem = nil
     }
-    
-    @objc private func startStopButtonTapped() {
-        if grid.cells.isEmpty {
-            return
-        }
-        if !isWorked {
-            self.timer = Timer.scheduledTimer(withTimeInterval: 0.250 , repeats: true) { [weak self] _ in
-                self?.grid.updateCells()
-                self?.gridView.setNeedsDisplay()
-            }
-        } else {
-            deleteTimer()
-        }
-        isWorked.toggle()
-    }
-    
-    @objc private func randomizeButtonTapped() {
-        deleteTimer()
+
+    private func randomize() {
+        isWorked = false
         grid.randomizeCells()
         gridView.setNeedsDisplay()
     }
-}
 
+    private func updateGridView() {
+        let workItem = DispatchWorkItem { [weak self] in
+            self?.grid.updateCells()
+            DispatchQueue.main.async {
+                self?.gridView.setNeedsDisplay()
+            }
+        }
+        self.workItem = workItem
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.250 , repeats: true) { _ in
+            DispatchQueue.global().async(execute: workItem)
+        }
+    }
+}

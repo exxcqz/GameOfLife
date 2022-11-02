@@ -19,7 +19,7 @@ class Grid {
         cells = []
         for x in 0..<size {
             for y in 0..<size {
-                let randomState = arc4random_uniform(4)
+                let randomState = arc4random_uniform(5)
                 let cell = Cell(x: x, y: y, state: randomState == 0 ? .alive : .dead)
                 cells.append(cell)
             }
@@ -30,9 +30,17 @@ class Grid {
         var updatedCells: [Cell] = []
         let liveCells = cells.filter { $0.state == .alive }
         for cell in cells {
-            let livingNeighbors = liveCells.filter { $0.isNeighbor(to: cell) }
+            var livingNeighborsCount = 0
+            for liveCell in liveCells {
+                if livingNeighborsCount > 3 {
+                    break
+                }
+                if liveCell.isNeighbor(to: cell) {
+                    livingNeighborsCount += 1
+                }
+            }
 
-            switch livingNeighbors.count {
+            switch livingNeighborsCount {
             case 2...3 where cell.state == .alive:
                 updatedCells.append(cell)
             case 3 where cell.state == .dead:

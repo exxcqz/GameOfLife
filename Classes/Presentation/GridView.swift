@@ -28,7 +28,6 @@ final class GridView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.saveGState()
-        
         for cell in grid.cells {
             let rect = CGRect(x: .init(CGFloat(cell.x) * cellSize.width),
                               y: .init(CGFloat(cell.y) * cellSize.height),
@@ -43,6 +42,7 @@ final class GridView: UIView {
     }
     
     private func setup() {
+        clipsToBounds = true
         layer.borderWidth = 2
         layer.borderColor = UIColor.gray.cgColor
         layer.cornerRadius = 6
